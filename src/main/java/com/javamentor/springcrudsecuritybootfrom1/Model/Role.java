@@ -27,9 +27,6 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private ERole role;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<User> users;
-
     public Role(ERole role) {
         this.role = role;
     }

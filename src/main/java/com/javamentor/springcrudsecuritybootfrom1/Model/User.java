@@ -45,7 +45,7 @@ public class User {
     private String lastName;
 
     @Column(name = "age")
-    @NotEmpty(message = "Age name should not be empty!")
+   // @NotEmpty(message = "Age name should not be empty!")
     @Min(value = 0, message = "The age cannot be less than 0.")
     private int age;
 
@@ -67,7 +67,7 @@ public class User {
                 @NotEmpty(message = "Last name should not be empty!")
                 @Size(min = 2, max = 30, message = "Minimum 2 and maximum 30 characters")
                         String lastName,
-                @NotEmpty(message = "Age name should not be empty!")
+                //@NotEmpty(message = "Age name should not be empty!")
                 @Min(value = 0, message = "The age cannot be less than 0.")
                         int age) {
         this.username = username;

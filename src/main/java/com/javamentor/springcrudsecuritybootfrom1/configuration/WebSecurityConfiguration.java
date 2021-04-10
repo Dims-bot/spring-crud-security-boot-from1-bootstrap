@@ -19,13 +19,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     private UserDetailsServiceImpl userDetailsService;
-    private LoginSuccessHandler loginSuccessHandler;
+    //private LoginSuccessHandler loginSuccessHandler;
 
     @Autowired
     public WebSecurityConfiguration(UserDetailsServiceImpl userDetailsService,
             LoginSuccessHandler loginSuccessHandler) {
         this.userDetailsService = userDetailsService;
-        this.loginSuccessHandler = loginSuccessHandler;
+       // this.loginSuccessHandler = loginSuccessHandler;
     }
 
     @Bean

@@ -7,20 +7,47 @@ import com.javamentor.springcrudsecuritybootfrom1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserServiceImpl implements UserService {
+
+    RepositoryImpl repositoryImpl;
 
     @Autowired
-    RepositoryImpl repositoryImpl;
+    public UserServiceImpl(RepositoryImpl repositoryImpl) {
+        this.repositoryImpl = repositoryImpl;
+    }
 
     public List<User> getAllUsers() {
         return repositoryImpl.getAllUsers();
     }
+
+    @Override
+    public User getUserById(Long id) { return repositoryImpl.getUserById(id);}
+
+    @Override
+    public User getUserByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public void save(User user) { repositoryImpl.save(user); }
+
+    @Override
+    @Transactional
+    public void updateUser(Long id, User updatedUser) { repositoryImpl.updateUser(id, updatedUser);}
+
+    @Override
+    public void deleteUser(Long id) {
+
+    }
+
 
 //    private final UserRepository userRepository;
 //    //private final RoleRepository roleRepository;
