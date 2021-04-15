@@ -19,7 +19,7 @@ public class UserDetailsImpl implements UserDetails {
     private String firstName;
     private String lastName;
 
-    @JsonIgnore
+    //@JsonIgnore
     private String password;
 
     private int age;

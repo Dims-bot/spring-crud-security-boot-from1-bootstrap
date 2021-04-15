@@ -5,10 +5,12 @@ import com.javamentor.springcrudsecuritybootfrom1.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -52,6 +54,7 @@ public class UserController {
 
     @GetMapping("/users/admin/{id}")
     public String getUserById(@PathVariable("id") Long id, Model model) {
+
         model.addAttribute("user", userService.getUserById(id));
 
         return "getUserByID";
@@ -73,7 +76,21 @@ public class UserController {
 
         return "redirect:/users/admin";
     }
+    @GetMapping("/users/user")
+    public String getUserByLogin(ModelMap modelMap, Principal principal) {
+        User user = userService.getUserByUsername(principal.getName());
 
+        modelMap.addAttribute("user", userService.getUserByUsername(principal.getName()));
+        modelMap.addAttribute("userRolesPrefixFree", user.getUserRolesPrefixFree());
 
+        return "user";
+    }
 
+    @DeleteMapping("/users/admin/{id}")
+    public String deleteUserById(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
+        return "redirect:/users/admin";
+    }
 }
+
+

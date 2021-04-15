@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -19,13 +18,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     private UserDetailsServiceImpl userDetailsService;
-    //private LoginSuccessHandler loginSuccessHandler;
+    private LoginSuccessHandler loginSuccessHandler;
 
     @Autowired
     public WebSecurityConfiguration(UserDetailsServiceImpl userDetailsService,
-            LoginSuccessHandler loginSuccessHandler) {
+                                    LoginSuccessHandler loginSuccessHandler) {
         this.userDetailsService = userDetailsService;
-       // this.loginSuccessHandler = loginSuccessHandler;
+        this.loginSuccessHandler = loginSuccessHandler;
     }
 
     @Bean
@@ -56,7 +55,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 formLogin()
 
                 .loginPage("/login")
-                .successHandler(new LoginSuccessHandler())
+                .successHandler(loginSuccessHandler)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll()
